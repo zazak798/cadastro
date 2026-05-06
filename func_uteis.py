@@ -2,74 +2,69 @@ def cadastro_item(lista_de_itens: list):
     item = {}
     nome_item = input('Que item vamos cadastrar? ').strip().capitalize()
 
-    for itens in lista_de_itens:
-        if nome_item == itens['nome']:
-            print('Item já existente!')
-            return
-    
-    cad_item_quantidade = input('Quantos vamos cadastrar? ')
+    while True:
+        for itens in lista_de_itens:
+            if nome_item == itens['nome']:
+                print('Item já existente!')
+        
+        cad_item_quantidade = input('Quantos vamos cadastrar? ')
 
-    try:
-        quantidade = int(cad_item_quantidade)
-        item['nome'] = nome_item
-        item['quantidade'] = int(quantidade)
-        lista_de_itens.append(item)
+        try:
+                quantidade = int(cad_item_quantidade)
+                item['nome'] = nome_item
+                item['quantidade'] = int(quantidade)
+                lista_de_itens.append(item)
 
-        print(f"nome: {item['nome']} ")
-        print(f"quantidade: {item['quantidade']} ")
+                print(f"nome: {item['nome']} ")
+                print(f"quantidade: {item['quantidade']} ")
+                break
 
-    except:
-        print('Quantidade inválida!')
-        return
-    
+        except:
+            print('Quantidade inválida!')
+        
 
 
 def editar(lista_de_itens: list):
     item_para_editar = input('Que item vamos editar? ').capitalize()
-    if lista_de_itens:
-        for item in lista_de_itens:
-            if item['nome'] == item_para_editar:
-                alteracao = input(
-                    'Digite [R/r] para Retirar a quantidade desejada\n'
-                    'Digite [A/a] para adicionar a quantidade desejada\n' 
-                    ''
-                    ).strip().capitalize()
-                
-                if alteracao == 'A':
-                    quantidade = input('Digite a quantidade: ')
-
-                    try:
-                        item['quantidade'] += int(quantidade)
-                        print('Quantidade atualizada')
-                        break
-
-                    except:
-                        print('Quantidade invalida')
-                elif alteracao == 'R':
-                    quantidade = input('Digite a quantidade: ')
-
-                    try:
-                        if int(quantidade) < item['quantidade']:
-                            item['quantidade'] -= int(quantidade)
-                            print('Quantidade atualizada')
-                            break
-
-                        else:
-                            print('Quantidade maior que temos no estoque')
-                            break
-
-                    except:
-                        print('Quantidade invalida')
-                else:
-                    print('Opção inválida!')
-                    return
-
-        else:
-            print('Não encontrei o item desejado')
-            return
+    while True:
+        item = procura_item(lista_de_itens, item_para_editar)
+        alteracao = input(
+            'Digite [R/r] para Retirar a quantidade desejada\n'
+            'Digite [A/a] para adicionar a quantidade desejada\n' 
+            ''
+            ).strip().capitalize()
         
-    else:
-        print('Lista vazia')
+        if alteracao == 'A':
+            quantidade = input('Digite a quantidade: ')
+
+            try:
+                item['quantidade'] += int(quantidade)
+
+                print('Quantidade atualizada')
+                break
+
+            except:
+                print('Quantidade invalida')
+
+        elif alteracao == 'R':
+            quantidade = input('Digite a quantidade: ')
+
+            try:
+                if int(quantidade) <= item['quantidade']:
+                    item['quantidade'] -= int(quantidade)
+                    print('Quantidade atualizada')
+                    break
+
+                else:
+                    print('Quantidade maior que temos no estoque')
+                    break
+
+            except:
+                print('Quantidade invalida')
+        else:
+            print('Opção inválida!')
+
+
 
 def listar(lista : list):
     if lista:
@@ -78,7 +73,6 @@ def listar(lista : list):
     
     else:
         print('Lista vazia')
-        return
 
 def remover(lista):
     item_a_remover = input('Vamos remover qual item?' \
@@ -92,21 +86,9 @@ def remover(lista):
 
     print("Item não encontrado")       
 
-def continua(msg):
-    continuar = True
-
-    while continuar:
-        continua = input(f'Quer continuar {msg} [S/N] ').upper()
-
-        if continua == 'S':
-            continuar = True
-            return continuar
+def procura_item(lista, item):
+    for produto in lista:
+        if item == produto['nome']:
+            return produto
         
-        elif continua == 'N':
-            return False
-        
-        else:
-            print("Opção inválida")
-            continuar = True
-
-
+    print('Item não existe na lista')

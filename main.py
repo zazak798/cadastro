@@ -1,45 +1,44 @@
-from func_uteis import cadastro_item, continua, editar, listar, remover
+from func_uteis import cadastro_item, editar, listar, remover
+import os
 
 if __name__ == "__main__":
     print('Bem-vindo ao sistema de itens!')
     print('-'*30 )
-    
+    resposta = None
     lista_de_itens = []
-    while True:
-        opcao = input(
+    while resposta != 'S':
+        resposta = input(
             'Digite C para cadastrar \n' \
             'Digite R para remover itens \n' \
             'Digite E para editar um item \n' \
             'Digite L para Listar os itens \n' \
+            'Digite S para Sair \n' \
             ''
             ).upper()
 
-        if opcao == 'C':
-            while True:
-                cadastro_item(lista_de_itens)
-                if not continua('Cadastrando'):
-                    break
+        if resposta == 'C':
+            cadastro_item(lista_de_itens)
+            os.system('cls')
         
-        elif opcao == "E":
-            while True:
-                editar(lista_de_itens)
+        elif resposta == "E":
+            editar(lista_de_itens)
+            os.system('cls')
 
-                if not continua('Editando'):
-                    break
 
-        elif opcao == 'L':
+        elif resposta == 'L':
             listar(lista_de_itens)
+            os.system('cls')
 
-        elif opcao == 'R':
+
+        elif resposta == 'R':
             remover(lista_de_itens)
+            os.system('cls')
+
+        elif resposta == 'S':
+            print('Adeus')
 
         else:
             print('Opção inválida.')
 
-        continuar = input('Quer continuar em nosso sistema? [S/N] ').upper()
-        
-        if continuar == 'S':
-            continue
-        break
 
 
