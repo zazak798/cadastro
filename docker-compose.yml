@@ -1,0 +1,23 @@
+services:
+  db_padaria:
+    image: mysql:8.4
+    container_name: mysql_padaria
+    restart: always
+    environment:
+      # O Docker vai buscar essas variáveis no seu arquivo .env
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      TZ: America/Sao_Paulo
+    command:
+      - --mysql-native-password=ON
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3307:3306" # Porta 3307 no seu PC, 3306 dentro do Docker
+    volumes:
+      - volume_dados_padaria:/var/lib/mysql
+
+volumes:
+  volume_dados_padaria:

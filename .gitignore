@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Docker e Banco de Dados
+# Se o seu docker-compose usa um volume para o MySQL/PostgreSQL, ignore a pasta:
+data/
+db_data/
+mysql/
+
+# IDEs e Sistema
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

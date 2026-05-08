@@ -1,13 +1,13 @@
-from func_uteis import cadastro_item, editar, listar, remover
+from func_utils import  item_registration, edit, list_to_items, remove_item
 import os
 
 if __name__ == "__main__":
     print('Bem-vindo ao sistema de itens!')
     print('-'*30 )
-    resposta = None
-    lista_de_itens = []
-    while resposta != 'S':
-        resposta = input(
+    response = None
+    list_of_items = []
+    while response != 'S':
+        response = input(
             'Digite C para cadastrar \n' \
             'Digite R para remover itens \n' \
             'Digite E para editar um item \n' \
@@ -16,25 +16,25 @@ if __name__ == "__main__":
             ''
             ).upper()
 
-        if resposta == 'C':
-            cadastro_item(lista_de_itens)
+        if response == 'C':
+            item_registration(list_of_items)
             os.system('cls')
         
-        elif resposta == "E":
-            editar(lista_de_itens)
+        elif response == "E":
+            edit(list_of_items)
             os.system('cls')
 
 
-        elif resposta == 'L':
-            listar(lista_de_itens)
+        elif response == 'L':
+            list_to_items(list_of_items)
             os.system('cls')
 
 
-        elif resposta == 'R':
-            remover(lista_de_itens)
+        elif response == 'R':
+            remove_item(list_of_items)
             os.system('cls')
 
-        elif resposta == 'S':
+        elif response == 'S':
             print('Adeus')
 
         else:
